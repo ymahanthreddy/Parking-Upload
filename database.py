@@ -1,26 +1,16 @@
 import mysql.connector
+from mysql.connector import Error
 
-def save_parking_data(latitude, longitude, has_parking):
+def get_db_connection():
     try:
-        # Connect to the MySQL database
         connection = mysql.connector.connect(
-            host='mysql-7698aa2-ymreddy-7959.h.aivencloud.com',
-            user='avnadmin',
-            password='AVNS_ATKsEXAR4RM2Wn1CkYR',
-            database='parking_db'
+            host='mysql-7698aa2-ymreddy-7959.h.aivencloud.com',  # Replace with your DB host
+            user='avnadmin',  # Replace with your DB username
+            password='AVNS_ATKsEXAR4RM2Wn1CkYR',  # Replace with your DB password
+            database='parking_db'  # Replace with your DB name
         )
-
-        cursor = connection.cursor()
-
-        # SQL query to insert parking data
-        query = "INSERT INTO parking_locations (latitude, longitude, has_parking) VALUES (%s, %s, %s)"
-        cursor.execute(query, (latitude, longitude, has_parking))
-
-        # Commit the transaction
-        connection.commit()
-        cursor.close()
-        connection.close()
-        return True
-    except Exception as e:
-        print(f"Error: {e}")
-        return False
+        if connection.is_connected():
+            return connection
+    except Error as e:
+        print(f"Error connecting to MySQL database: {e}")
+        return None
