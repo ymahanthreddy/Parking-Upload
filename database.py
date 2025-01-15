@@ -4,10 +4,10 @@ def save_parking_data(latitude, longitude, has_parking):
     try:
         # Connect to the MySQL database
         connection = mysql.connector.connect(
-            host='your-database-host',
-            user='your-database-user',
-            password='your-database-password',
-            database='your-database-name'
+            host='mysql-7698aa2-ymreddy-7959.h.aivencloud.com',
+            user='avnadmin',
+            password='AVNS_ATKsEXAR4RM2Wn1CkYR',
+            database='parking_db'
         )
 
         cursor = connection.cursor()
